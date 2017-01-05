@@ -1,0 +1,26 @@
+{% set os_map = salt['grains.filter_by']({
+  'Debian': {
+    'pkg': 'nullmailer',
+    'service': 'nullmailer',
+    'user': 'mail',
+    'group': 'mail',
+  },
+}, merge=salt['pillar.get']('nullmailer:lookup')) %}
+
+
+{% set default_settings = {
+  'nullmailer': {
+    'me': salt['grains.get']('fqdn'),
+    'adminaddr': 'root@' + salt['grains.get']('fqdn'),
+    'defaultdomain': salt['grains.get']('domain'),
+    'tls': True,
+    'insecure': False,
+    'authlogin': False,
+    'port': 587,
+  },
+} %}
+
+{% do default_settings.nullmailer.update(os_map) %}
+
+{% set nullmailer_settings = salt['pillar.get']('nullmailer', default=default_settings.nullmailer, merge=True) %}
+

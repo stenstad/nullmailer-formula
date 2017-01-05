@@ -1,0 +1,2 @@
+{%- from "nullmailer/map.jinja" import nullmailer_settings with context -%}
+{{ nullmailer_settings.server }} smtp --port={{ nullmailer_settings.port }} {% if nullmailer_settings.tls %}--starttls {% endif %}{%if nullmailer_settings.insecure %}--insecure {% endif %}{% if nullmailer_settings.authlogin %}--auth-login {% endif %}--user={{ nullmailer_settings.remoteuser }} --pass={{ nullmailer_settings.remotepass }}

@@ -1,0 +1,8 @@
+# ``nullmailer`` formula configuration:
+
+nullmailer:
+  server: mail.example.com
+  port: 587
+  remoteuser: serviceaccount@example.com
+  remotepass: mypassword
+  adminaddr: admin@example.com
